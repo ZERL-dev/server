@@ -1,5 +1,3 @@
 # server
 
-docker run -p 8080:8080 ZERL/server
-
-docker build --platform="linux/arm64" --build-arg JAR_FILE=target/*.jar -t myorg/myapp .
+backend tech stack: Java Spring (spring boot, spring security), AWS RDS Aurora (Postgres in Development), AWS Lambda (or Vercel), AWS Cognito, Docker
