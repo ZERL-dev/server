@@ -1,1 +1,1 @@
-docker-compose up
+./mvnw spring-boot:run
