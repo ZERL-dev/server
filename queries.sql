@@ -5,13 +5,13 @@ CREATE TABLE admin (
 );
 
 CREATE TABLE listing (
-    id SERIAL PRIMARY KEY NOT NULL,
-    title TEXT,
-    price INTEGER,
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    price INTEGER NOT NULL,
     perks TEXT,
-    address TEXT,
+    address TEXT NOT NULL,
     description TEXT,
     application_link TEXT,
-    thumbnail TEXT,
+    thumbnail TEXT NOT NULL,
     gallery TEXT[]
 );

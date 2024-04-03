@@ -1,5 +1,5 @@
 package ZERL.server.utils;
 
-public class db {
+public class Db {
     
 }
