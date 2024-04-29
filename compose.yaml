@@ -14,18 +14,17 @@ services:
     - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+      - ./queries.sql:/docker-entrypoint-initdb.d/queries.sql
   
-  web:
-    env_file:
-      - .env
-    build:
-      dockerfile: Dockerfile
-      args:
-        - 'JAR_FILE=target/*.jar'
-    ports:
-      - '8080:8080'
-    volumes:
-      - .:/src
-    depends_on:
-      db:
-        condition: service_healthy
+  # zerl:
+  #   env_file:
+  #     - .env
+  #   build:
+  #     dockerfile: Dockerfile
+  #     args:
+  #       - 'JAR_FILE=target/*.jar'
+  #   ports:
+  #     - '${JAVA_PORT}:${JAVA_PORT}'
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy

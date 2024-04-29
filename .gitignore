@@ -37,3 +37,6 @@ build/
 
 ### psql ### 
 pgdata/
+
+### misc ###
+.DS_Store
