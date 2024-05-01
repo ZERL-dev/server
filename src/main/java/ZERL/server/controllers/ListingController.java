@@ -7,35 +7,37 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import ZERL.server.models.ListingModel;
 
 @RestController
+@RequestMapping("/listing")
 public class ListingController {
 
-    @GetMapping("/listings")
+    @GetMapping("/all")
     public ListingModel[] getAllListings() {
 
         return null;
     }
 
-    @GetMapping("/listings/id/{id}")
-    public ListingModel getListingByID(@RequestParam(value = "id") int id) {
+    @GetMapping("/id/{id}")
+    public ListingModel getListingByID(@RequestParam(value = "id") double id) {
         return null;
     }
 
-    @PostMapping("/listings/new")
+    @PostMapping("/new")
     public void createListing(@RequestBody ListingModel listing) {
     
     }
 
-    @PutMapping("/listings/update/{id}")
-    public ListingModel updateListingByID(@RequestParam(value = "id") int id) {
+    @PutMapping("/update/{id}")
+    public ListingModel updateListingByID(@RequestParam(value = "id") double id) {
         return null;
     }
 
-    @DeleteMapping("/listings/delete/{id}")
-    public void deleteListingByID(@RequestParam(value = "id") int id) {
+    @DeleteMapping("/delete/{id}")
+    public void deleteListingByID(@RequestParam(value = "id") double id) {
     
     }
 

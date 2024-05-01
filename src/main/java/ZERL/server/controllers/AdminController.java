@@ -4,18 +4,20 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import ZERL.server.models.AdminModel;
 
 @RestController
+@RequestMapping("/admin")
 public class AdminController {
 
-    @PostMapping("/admin/auth")
+    @PostMapping("/auth")
     public String authenticateAdmin(@RequestBody AdminModel admin) {
         return "true";
     }
 
-    @PutMapping("/admin/update")
+    @PutMapping("/update")
     public String updateAdmin(@RequestBody AdminModel admin) {
         return "true";
     }

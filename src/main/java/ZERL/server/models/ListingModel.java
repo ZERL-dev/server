@@ -1,7 +1,15 @@
 package ZERL.server.models;
 
-public class ListingModel {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
+public class ListingModel {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer id;
     public String title;
     public Integer price;
@@ -9,6 +17,7 @@ public class ListingModel {
     public String address;
     public String description;
     public String application_link;
+    public String date;
     public String thumbnail;
     public String[] gallery;
 
@@ -26,4 +35,5 @@ public class ListingModel {
         }
     }
 
+    public ListingModel() {}
 }

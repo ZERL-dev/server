@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 
 // @Repository
 // public interface AdminRepository extends JpaRepository<AdminModel, Long> {
-    
+
 //     @Query("SELECT * FROM listing")
 //     AdminModel authenticateAdmin();
+
+//     @Query("UPDATE listing SET username = ?1, password = ?2 WHERE id = ?3")
+//     void updateAdmin(String username, String password, double id);
 // }
