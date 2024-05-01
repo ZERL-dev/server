@@ -12,6 +12,7 @@ CREATE TABLE listing (
     address TEXT NOT NULL,
     description TEXT,
     application_link TEXT,
+    date TEXT NOT NULL,
     thumbnail TEXT NOT NULL,
     gallery TEXT[]
 );

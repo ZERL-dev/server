@@ -4,11 +4,16 @@
 # export $(cat .env | xargs)
 
 
+if docker info 2>&1 | grep -q "ERROR"
+then
+
 # for windows, simply put your path to docker desktop, the default is the following:
 "C:\Program Files\Docker\Docker\Docker Desktop.exe"
 
 # for mac
 # open -a Docker
+
+fi
 
 
 # wait for docker to start
