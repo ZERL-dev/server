@@ -9,30 +9,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ZERL.server.models.ListingModel;
+import ZERL.server.models.Listing;
 
 @RestController
 @RequestMapping("/listing")
 public class ListingController {
 
     @GetMapping("/all")
-    public ListingModel[] getAllListings() {
+    public Listing[] getAllListings() {
 
         return null;
     }
 
     @GetMapping("/id/{id}")
-    public ListingModel getListingByID(@RequestParam(value = "id") double id) {
+    public Listing getListingByID(@RequestParam(value = "id") double id) {
         return null;
     }
 
     @PostMapping("/new")
-    public void createListing(@RequestBody ListingModel listing) {
+    public void createListing(@RequestBody Listing listing) {
     
     }
 
     @PutMapping("/update/{id}")
-    public ListingModel updateListingByID(@RequestParam(value = "id") double id) {
+    public Listing updateListingByID(@RequestParam(value = "id") double id) {
         return null;
     }
 
@@ -40,5 +40,4 @@ public class ListingController {
     public void deleteListingByID(@RequestParam(value = "id") double id) {
     
     }
-
 }

@@ -4,21 +4,40 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 
 @Entity
-public class ListingModel {
-    
+public class Listing {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Integer id;
+    public Long id;
+    
+    @Column(columnDefinition = "TEXT")
     public String title;
+    
+    @Column(columnDefinition = "INTEGER")
     public Integer price;
+    
+    @Column(columnDefinition = "TEXT")
     public String perks;
+    
+    @Column(columnDefinition = "TEXT")
     public String address;
+    
+    @Column(columnDefinition = "TEXT")
     public String description;
+    
+    @Column(columnDefinition = "TEXT")
     public String application_link;
+    
+    @Column(columnDefinition = "TEXT")
     public String date;
+    
+    @Column(columnDefinition = "TEXT")
     public String thumbnail;
+    
+    @Column(columnDefinition = "TEXT[]")
     public String[] gallery;
 
     public Boolean validate() {
@@ -35,5 +54,5 @@ public class ListingModel {
         }
     }
 
-    public ListingModel() {}
+    public Listing() {}
 }

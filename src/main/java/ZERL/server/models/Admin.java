@@ -4,16 +4,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 
 @Entity
-public class AdminModel {
+public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Integer id;
-    public String username;
-    public String password;
+    public Long id;
     
+    @Column(columnDefinition = "TEXT")
+    public String username;
+    
+    @Column(columnDefinition = "TEXT")
+    public String password;
+
     public Boolean validate() {
 
         if (
@@ -26,5 +31,5 @@ public class AdminModel {
         }
     }
 
-    public AdminModel() {}
+    public Admin() {}
 }
