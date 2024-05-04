@@ -1,34 +1,36 @@
-// package ZERL.server.services;
+package ZERL.server.services;
 
-// import org.springframework.stereotype.Service;
-// import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
-// import ZERL.server.models.ListingModel;
-// import ZERL.server.repositories.ListingRepository;
+import java.util.List;
 
-// @Service
-// public class ListingService {
+import ZERL.server.models.Listing;
+import ZERL.server.repositories.ListingRepository;
 
-//     @Autowired
-//     private ListingRepository listingRepository;
+@Service
+public class ListingService {
 
-//     public ListingModel[] getAllListings() {
-//         return listingRepository.getAllListings();
-//     }
+    @Autowired
+    private ListingRepository listingRepository;
 
-//     public ListingModel getListingByID(String id) {
-//         return listingRepository.getListingByID(id);
-//     }
+    public List<Listing> getAllListings() {
+        return listingRepository.getAllListings();
+    }
 
-//     public void createListing(double id, String title, double price, String perks, String address, String description, String application_link, String thumbnail, String[] gallery) {
-//         listingRepository.createListing(id, title, price, perks, address, description, application_link, thumbnail, gallery);
-//     }
+    public Listing getListingByID(String id) {
+        return listingRepository.getListingByID(id);
+    }
 
-//     public void updateListing(String title, double price, String perks, String address, String description, String application_link, String thumbnail, String[] gallery, double id) {
-//         listingRepository.updateListing(title, price, perks, address, description, application_link, thumbnail, gallery, id);
-//     }
+    public void createListing(Listing listing) {
+        listingRepository.createListing(listing);
+    }
 
-//     public void deleteListing(double id) {
-//         listingRepository.deleteListing(id);
-//     }
-// }
+    public void updateListing(Listing listing) {
+        listingRepository.updateListing(listing);
+    }
+
+    public void deleteListing(double id) {
+        listingRepository.deleteListing(id);
+    }
+}

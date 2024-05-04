@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# init .env values to be read by application.properties
-# export $(cat .env | xargs)
-
 
 if docker info 2>&1 | grep -q "ERROR"
 then
