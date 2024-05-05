@@ -14,5 +14,8 @@ CREATE TABLE Listing (
     application_link TEXT,
     date TEXT NOT NULL,
     thumbnail TEXT NOT NULL,
-    gallery TEXT[]
+    gallery TEXT[],
+    hidden BOOLEAN NOT NULL
 );
+
+-- test body: {"title":"test","price":1000,"perks":"test","address":"test","description":"test","application_link":"test","date":"test","thumbnail":"test","gallery":["test"],"hidden":false}

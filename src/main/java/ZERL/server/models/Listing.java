@@ -40,6 +40,9 @@ public class Listing {
     @Column(columnDefinition = "TEXT[]")
     public String[] gallery;
 
+    @Column(columnDefinition = "BOOLEAN")
+    public String[] hidden;
+
     public Boolean validate() {
 
         if (

@@ -32,24 +32,26 @@ public interface ListingRepository extends JpaRepository<Listing, Long> {
         ":#{#listing.application_link}, " +
         ":#{#listing.thumbnail}, " +
         ":#{#listing.gallery} " +
-    ")", nativeQuery = true)
-    public abstract void createListing(@Param("listing") Listing listing);
+    ") RETURNING *", nativeQuery = true)
+    public abstract Listing createListing(@Param("listing") Listing listing);
 
     @Modifying
     @Transactional
     @Query(value = "UPDATE Listing SET " +
         "title = :#{#listing.title}, " +
         "price = :#{#listing.price}, " +
-        "perks = ?3, " +
-        "address = ?4, " +
-        "description = ?5, " +
-        "application_link = ?6, " +
-        "thumbnail = ?7, " +
-        "gallery = ?8 " +
-        "WHERE id = ?9",
+        "perks = :#{#listing.perks}, " +
+        "address = :#{#listing.address}, " +
+        "description = :#{#listing.description}, " +
+        "application_link = :#{#listing.application_link}, " +
+        "thumbnail = :#{#listing.thumbnail}, " +
+        "gallery = :#{#listing.gallery} " +
+        "WHERE id = :#{#listing.id} RETURNING *",
     nativeQuery = true)
-    void updateListing(@Param("listing") Listing listing);
+    public abstract Listing updateListing(@Param("listing") Listing listing);
 
-    @Query("DELETE FROM Listing WHERE id = ?1")
-    void deleteListing(double id);
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Listing SET hidden = true WHERE id = ?1 RETURNING *", nativeQuery = true)
+    public abstract Listing deleteListing(double id);
 }

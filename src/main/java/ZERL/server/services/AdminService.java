@@ -12,10 +12,11 @@ public class AdminService {
     @Autowired
     private AdminRepository adminRepository;
 
-    public boolean authenticateAdmin(Admin admin) {
-        return false;
+    public Admin authenticateAdmin(Admin admin) {
+        return adminRepository.authenticateAdmin(admin);
     }
 
-    public void updateAdmin(Admin admin) {
+    public Admin updateAdmin(Admin admin) {
+        return adminRepository.updateAdmin(admin);
     }
 }
