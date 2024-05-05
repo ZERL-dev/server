@@ -1,3 +1,3 @@
 # server
 
-backend tech stack: Java Spring (spring boot, spring security), AWS RDS Aurora (Postgres in Development), AWS Lambda (or Vercel), AWS Cognito, Docker
+A Java Spring Boot API for a real estate site. Uses AWS RDS Aurora (Postgres in Development), Spring Data JPA, and Swagger UI.

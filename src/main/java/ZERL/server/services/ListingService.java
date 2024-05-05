@@ -22,15 +22,15 @@ public class ListingService {
         return listingRepository.getListingByID(id);
     }
 
-    public void createListing(Listing listing) {
-        listingRepository.createListing(listing);
+    public Listing createListing(Listing listing) {
+        return listingRepository.createListing(listing);
     }
 
-    public void updateListing(Listing listing) {
-        listingRepository.updateListing(listing);
+    public Listing updateListing(Listing listing) {
+        return listingRepository.updateListing(listing);
     }
 
-    public void deleteListing(double id) {
-        listingRepository.deleteListing(id);
+    public Listing deleteListing(double id) {
+        return listingRepository.deleteListing(id);
     }
 }
