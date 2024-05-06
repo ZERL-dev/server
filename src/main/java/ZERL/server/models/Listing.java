@@ -41,7 +41,7 @@ public class Listing {
     public String[] gallery;
 
     @Column(columnDefinition = "BOOLEAN")
-    public String[] hidden;
+    public Boolean hidden;
 
     public Boolean validate() {
 
@@ -49,7 +49,8 @@ public class Listing {
             this.title != null || this.title != "" &&
             this.price != null || this.price != 0 &&
             this.address != null || this.address != "" &&
-            this.thumbnail != null || this.thumbnail != ""
+            this.thumbnail != null || this.thumbnail != "" &&
+            this.hidden == false
         ) {
             return true;
         } else {
