@@ -30,7 +30,7 @@ public class ListingService {
         return listingRepository.updateListing(listing);
     }
 
-    public Listing deleteListing(double id) {
+    public Listing deleteListing(int id) {
         return listingRepository.deleteListing(id);
     }
 }

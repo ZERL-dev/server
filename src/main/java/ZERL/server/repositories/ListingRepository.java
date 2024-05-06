@@ -4,9 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.jpa.repository.Modifying;
 import jakarta.transaction.Transactional;
-
 import java.util.List;
 
 import ZERL.server.models.Listing;
@@ -14,15 +12,14 @@ import ZERL.server.models.Listing;
 @Repository
 public interface ListingRepository extends JpaRepository<Listing, Long> {
 
-    @Query("SELECT l FROM Listing l")
+    @Query("SELECT l FROM Listing l WHERE l.hidden = false")
     List<Listing> getAllListings();
 
-    @Query("SELECT l FROM Listing l WHERE l.id = ?1")
+    @Query("SELECT l FROM Listing l WHERE l.id = ?1 AND l.hidden = false")
     Listing getListingByID(String id);
 
-    @Modifying
     @Transactional
-    @Query(value = "INSERT INTO Listing (id, title, price, perks, address, description, application_link, thumbnail, gallery) VALUES " +
+    @Query(value = "INSERT INTO Listing (title, price, perks, address, description, application_link, date, thumbnail, gallery, hidden) VALUES " +
     "( " +
         ":#{#listing.title}, " +
         ":#{#listing.price}, " +
@@ -30,12 +27,13 @@ public interface ListingRepository extends JpaRepository<Listing, Long> {
         ":#{#listing.address}, " +
         ":#{#listing.description}, " +
         ":#{#listing.application_link}, " +
+        ":#{#listing.date}, " +
         ":#{#listing.thumbnail}, " +
-        ":#{#listing.gallery} " +
+        ":#{#listing.gallery}, " +
+        ":#{#listing.hidden} " +
     ") RETURNING *", nativeQuery = true)
     public abstract Listing createListing(@Param("listing") Listing listing);
 
-    @Modifying
     @Transactional
     @Query(value = "UPDATE Listing SET " +
         "title = :#{#listing.title}, " +
@@ -50,8 +48,7 @@ public interface ListingRepository extends JpaRepository<Listing, Long> {
     nativeQuery = true)
     public abstract Listing updateListing(@Param("listing") Listing listing);
 
-    @Modifying
     @Transactional
-    @Query(value = "UPDATE Listing SET hidden = true WHERE id = ?1 RETURNING *", nativeQuery = true)
-    public abstract Listing deleteListing(double id);
+    @Query(value = "UPDATE Listing SET hidden = true WHERE id = :#{#listing_id} RETURNING *", nativeQuery = true)
+    public abstract Listing deleteListing(@Param("listing_id") int id);
 }

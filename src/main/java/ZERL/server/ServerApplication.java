@@ -2,14 +2,14 @@ package ZERL.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.builders.RequestHandlerSelectors;
 
-
-@SpringBootApplication
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class ServerApplication {
 
     public static void main(String[] args) {
