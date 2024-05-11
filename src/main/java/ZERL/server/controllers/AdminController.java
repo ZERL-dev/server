@@ -20,11 +20,14 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping("/auth")
-    public Object authenticateAdmin(@RequestBody String jwt) {
+    public Object authenticateAdmin(@RequestBody Admin admin) {
 
         try {
 
-            Admin admin = adminService.readJWT(jwt);
+            if (admin.validate() == false) {
+                return new ResponseEntity<String>("Invalid body", HttpStatus.BAD_REQUEST);
+            }
+
             boolean authenticatedAdmin = adminService.authenticateAdmin(admin);
 
             if (authenticatedAdmin == false) {
@@ -38,13 +41,31 @@ public class AdminController {
         }
     }
 
+    @PostMapping("/create")
+    public Object createAdmin(@RequestBody Admin admin) {
+
+        try {
+
+            if (admin.validate() == false) {
+                return new ResponseEntity<String>("Invalid body", HttpStatus.BAD_REQUEST);
+            }
+
+            Admin createdAdmin = adminService.createAdmin(admin);
+
+            return new ResponseEntity<String>(adminService.createJWT(createdAdmin), HttpStatus.CREATED);
+
+        } catch (Exception error) {
+            return new ResponseEntity<Exception>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PatchMapping("/update")
     public Object updatePassword(@RequestBody Admin admin) {
 
         try {
 
             if (admin.validate() == false) {
-                return new ResponseEntity<String>("Invalid updated admin", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<String>("Invalid body", HttpStatus.BAD_REQUEST);
             }
 
             boolean authenticatedAdmin = adminService.authenticateAdmin(admin);
