@@ -20,4 +20,12 @@ public interface AdminRepository extends JpaRepository<Admin, Long> {
         "WHERE username = :#{#admin.username} RETURNING *",
     nativeQuery = true)
     public abstract Admin updatePassword(@Param("admin") Admin admin);
+
+    @Transactional
+    @Query(value = "INSERT INTO Admin (username, password) VALUES " +
+    "( " +
+        ":#{#admin.username}, " +
+        ":#{#admin.password} " +
+    ") RETURNING *", nativeQuery = true)
+    public abstract Admin createAdmin(@Param("admin") Admin admin);
 }

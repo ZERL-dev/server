@@ -1,6 +1,6 @@
 CREATE TABLE Admin (  
     id SERIAL PRIMARY KEY NOT NULL,
-    username TEXT NOT NULL,
+    username TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL
 );
 

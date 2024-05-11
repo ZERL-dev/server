@@ -4,14 +4,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-// import io.jsonwebtoken.Claims;
-// import io.jsonwebtoken.Jwts;
-// import io.jsonwebtoken.SignatureAlgorithm; 
-// import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.jose4j.jwt.JwtClaims;
+import org.jose4j.jws.JsonWebSignature;
+import java.security.Key;
+import org.jose4j.keys.HmacKey;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import ZERL.server.models.Admin;
 import ZERL.server.repositories.AdminRepository;
+import ZERL.server.models.Admin;
 
 @Service
 public class AdminService {
@@ -22,19 +22,20 @@ public class AdminService {
     @Value("${security.jwt.secret}")
     private String secret;
 
-    public Admin readJWT(String token) {
+    public String createJWT(Admin admin) throws Exception {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        // Claims parsedToken = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody(); 
+        JwtClaims jwtClaims = new JwtClaims();
+        JsonWebSignature jws = new JsonWebSignature();
+        Key key = new HmacKey(secret.getBytes());
 
-        // return objectMapper.readValue(parsedToken, Admin);
-        return new Admin();
-    }
+        jwtClaims.setClaim("username", admin.username);
+        jwtClaims.setClaim("password", admin.password);
 
-    public String createJWT(Admin admin) {
-        // System.out.println(secret);
-        // return Jwts.builder().signWith(SignatureAlgorithm.HS256, secret);
-        return "token";
+        jws.setKey(key);
+        jws.setAlgorithmHeaderValue("HS256");
+        jws.setPayload(jwtClaims.toJson());
+
+        return jws.getCompactSerialization();
     }
 
     public boolean authenticateAdmin(Admin admin) {
@@ -45,18 +46,25 @@ public class AdminService {
             return false;
         }
 
-        // if (BCrypt.checkpw(admin.password, existingAdminPassword)) {
-        //     return true;
-        // } else {
-        //     return false;
-        // }
-        return true;
+        if (BCrypt.checkpw(admin.password, existingAdminPassword)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Admin createAdmin(Admin admin) {
+
+        String encryptedPassword = BCrypt.hashpw(admin.password, BCrypt.gensalt());
+        admin.password = encryptedPassword;
+
+        return adminRepository.createAdmin(admin);
     }
 
     public Admin updatePassword(Admin admin) {
 
-        // String encryptedPassword = BCrypt.hashpw(admin.password, BCrypt.gensalt());
-        // admin.password = encryptedPassword;
+        String encryptedPassword = BCrypt.hashpw(admin.password, BCrypt.gensalt());
+        admin.password = encryptedPassword;
 
         return adminRepository.updatePassword(admin);
     }
