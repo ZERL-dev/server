@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
@@ -59,8 +60,8 @@ public class AdminController {
         }
     }
 
-    @PatchMapping("/update")
-    public Object updatePassword(@RequestBody Admin admin) {
+    @PatchMapping("/update/{updatedPassword}")
+    public Object updatePassword(@RequestBody Admin admin, @PathVariable String updatedPassword) {
 
         try {
 
@@ -70,9 +71,11 @@ public class AdminController {
 
             boolean authenticatedAdmin = adminService.authenticateAdmin(admin);
 
-            if (authenticatedAdmin == true) {
+            if (authenticatedAdmin == false) {
                 return new ResponseEntity<String>("Invalid admin creds", HttpStatus.UNAUTHORIZED);
             }
+
+            admin.password = updatedPassword;
 
             Admin updatedAdmin = adminService.updatePassword(admin);
 
